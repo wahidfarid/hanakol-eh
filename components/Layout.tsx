@@ -13,12 +13,15 @@ type Props = {
 
 
 const StyledContainer = styled.div`
-  background: url('/img/pattern.png');
+  min-height: calc(100vh - 85px);
 `
 const StyledContainerTW = tw(StyledContainer)`
   container
   h-full
   mx-auto
+  bg-white
+  bg-opacity-50
+  p-12
 `;
 
 const StyledFooter = tw.footer`
