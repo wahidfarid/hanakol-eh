@@ -1,14 +1,36 @@
+import React, { ReactNode } from 'react';
 import Link from 'next/link'
 import Layout from '../components/Layout'
 
 import tw from "tailwind-styled-components"
 
 
-const IndexPage = () => (
-  <Layout title="Hanakol eh?">
+type MainState = {
+  location: GeolocationCoordinates
+};
 
-    <h1 class="text-5xl">Please wait</h1>
-  </Layout>
-)
+class IndexPage extends React.Component<{}, MainState>{
+
+
+  getLocation = () => {
+    const parent = this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      parent.setState({
+        location: position.coords
+      });
+    });
+  };
+
+
+  render():ReactNode {
+    return <Layout title="Hanakol eh?">
+
+    <h1 className="text-5xl flex justify-between">
+      Press the button to find deals near you
+      <button className="mx-auto bg-yellow-400 text-2xl rounded p-4 font-semibold hover:bg-yellow-300" onClick={this.getLocation}>Start Looking!</button>
+      </h1>
+  </Layout>;
+  }
+}
 
 export default IndexPage
