@@ -1,43 +1,47 @@
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
 
-import GoogleFonts from "next-google-fonts";
+import tw from 'tailwind-styled-components';
+import styled from 'styled-components';
+
+import Header from './Header';
 
 type Props = {
   children?: ReactNode
   title?: string
 }
 
+
+
+const StyledContainer = styled.div`
+  background: url('/img/pattern.png');
+`
+const StyledContainerTW = tw(StyledContainer)`
+  container
+  h-full
+  mx-auto
+`;
+
+const StyledFooter = tw.footer`
+  fixed
+  bottom-0
+  p-1
+  justify-center
+  w-full
+  bg-yellow-100
+  text-center
+  text-sm
+`
+
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
   <div>
-    <GoogleFonts href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;1,700&display=swap" />
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
-      </nav>
-    </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
+    <Header title={title}>
+    </Header>
+    <StyledContainerTW>
+      {children}
+    </StyledContainerTW>
+    <StyledFooter>
+      <span><a href="https://github.com/wahidmagdy/hanakol-eh">Made with  ❤️  from  🇪🇬</a></span>
+    </StyledFooter>
   </div>
 )
 

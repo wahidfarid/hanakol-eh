@@ -1,10 +1,13 @@
 import { AppProps } from 'next/app';
 import "tailwindcss/tailwind.css";
-
-import "../styles/barlow.css"
+import GoogleFonts from "next-google-fonts";
+import "../styles/style.css"
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <>
+  <GoogleFonts href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;1,700&family=Amiri:wght@700&display=swap" />
+  <Component {...pageProps} />
+  </>
 }
 
 // Only uncomment this method if you have blocking data requirements for

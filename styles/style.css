@@ -1,0 +1,10 @@
+/* Some global styles */
+html{
+    font-family: 'Barlow', sans-serif;
+    background:url('/img/pattern.png');
+    background-size: 150px;
+}
+body{
+    background: rgba(255,255,255,0.9);
+    min-height: 100vh;
+}
