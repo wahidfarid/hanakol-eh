@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "latest",
+    "next-google-fonts": "^1.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -16,6 +17,10 @@
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.6",
+    "tailwind-styled-components": "^1.0.7",
+    "tailwindcss": "^2.0.3",
     "typescript": "4.0"
   },
   "license": "MIT"
