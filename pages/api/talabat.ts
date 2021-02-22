@@ -6,9 +6,8 @@ class TalabatAPI{
 
         let url = "https://31dme1tc4c.execute-api.eu-central-1.amazonaws.com/Hanakol-eh-api?loc=1234567";
         let response = await axios.get(url);
-        console.log(response);
 
-        return [];
+        return response.data as RestaurantData[];
     }
 }
 
