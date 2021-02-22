@@ -14,6 +14,8 @@ type RestaurantData ={
     discount?: {
         percentage: number,
         text: string
-    }
+    },
+    image: string,
+    link: string
 }
 export default RestaurantData;

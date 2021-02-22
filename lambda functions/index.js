@@ -30,6 +30,8 @@ exports.handler = async function(event, context, callback) {
         id: restaurant.bid,
         isDiscounted: restaurant.dtxt!="",
         isDeal: restaurant.ptxt!="",
+        image: "https://images.deliveryhero.io/image/otlob/restaurants/"+restaurant.lg,
+        link: `https://www.talabat.com/egypt/restaurant/${restaurant.bid}/${restaurant.bsl}`
       }
     });
     
