@@ -1,7 +1,7 @@
 /* Some global styles */
 html{
     font-family: 'Barlow', sans-serif;
-    background:url('/img/pattern.png');
+    background:url('/img/pattern.svg');
     background-size: 150px;
 }
 body{

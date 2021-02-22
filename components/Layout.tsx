@@ -14,6 +14,7 @@ type Props = {
 
 const StyledContainer = styled.div`
   min-height: calc(100vh - 85px);
+  height: 100%;
 `
 const StyledContainerTW = tw(StyledContainer)`
   container
@@ -37,8 +38,7 @@ const StyledFooter = tw.footer`
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
   <div>
-    <Header title={title}>
-    </Header>
+    <Header title={title}/>
     <StyledContainerTW>
       {children}
     </StyledContainerTW>

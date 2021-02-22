@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
 import Link from 'next/link'
 import Layout from '../components/Layout'
-
 import tw from "tailwind-styled-components"
+import APIAggregator from './api/api-aggregator';
+
 
 
 type MainState = {
@@ -18,6 +19,8 @@ class IndexPage extends React.Component<{}, MainState>{
       parent.setState({
         location: position.coords
       });
+
+      APIAggregator.getAllRestaurantData(position.coords);
     });
   };
 
