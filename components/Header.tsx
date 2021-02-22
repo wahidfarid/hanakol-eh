@@ -22,14 +22,14 @@ const StyledTitle = tw.h1`
   text-bold
   mx-6
 `;
-const StyledArabicTitle = styled.h1`
-  font-family: 'amiri' !important;
-  font-weight: 700 !important;
-`;
-const StyledArabicTitleTW = tw(StyledArabicTitle)`
+const StyledArabicTitleTW = tw.h1`
   text-3xl
   text-bold
   mx-6
+`;
+const StyledArabicTitle = styled(StyledArabicTitleTW)`
+  font-family: 'amiri' !important;
+  font-weight: 700 !important;
 `;
 
 const Header = ({title} : Props) => (
@@ -41,7 +41,7 @@ const Header = ({title} : Props) => (
     </Head>
     <StyledHeader>
       <StyledTitle>Hanakol eh</StyledTitle>
-      <StyledArabicTitleTW>هناكل إيه</StyledArabicTitleTW>      
+      <StyledArabicTitle>هناكل إيه</StyledArabicTitle>      
     </StyledHeader>
   </>
 )

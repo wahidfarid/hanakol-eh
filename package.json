@@ -8,6 +8,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@graywolfai/react-heroicons": "^1.2.3",
     "axios": "^0.21.1",
     "lottie-react": "^2.1.0",
     "next": "latest",
