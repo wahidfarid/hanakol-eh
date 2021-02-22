@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+/lambda\ functions/axios
+/lambda\ functions/follow-redirects
+
 # testing
 /coverage
 
