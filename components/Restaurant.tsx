@@ -34,6 +34,7 @@ const StyledSubtitle = tw.h4`
 `;
 const StyledBottomSection = tw.div`
     p-4
+    pt-2
     bg-gray-100
     flex
     flex-col

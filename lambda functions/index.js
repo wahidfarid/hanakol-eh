@@ -123,7 +123,7 @@ exports.handler = async function(event, context, callback) {
         // flatten array
         menuItems = menuItems.flat();
         // filter for deals by existence of old price
-        menuItems = menuItems.filter((menuItem)=> menuItem.opr != -1);
+        menuItems = menuItems.filter((menuItem)=> menuItem.opr != -1 && menuItem.opr != menuItem.pr);
         // pluck needed attributed
         menuItems = menuItems.map((menuItem)=> {
           return {
