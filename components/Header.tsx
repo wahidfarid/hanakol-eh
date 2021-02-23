@@ -1,8 +1,5 @@
-import React, { ReactNode } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import Head from 'next/head';
-
-import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
 type Props = {
@@ -16,11 +13,6 @@ const StyledHeader = tw.header`
   to-yellow-400
   flex
   justify-center
-`;
-const StyledTitle = tw.h1`
-  text-3xl
-  text-bold
-  mx-6
 `;
 const StyledArabicTitleTW = tw.h1`
   text-5xl

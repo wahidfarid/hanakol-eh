@@ -1,6 +1,4 @@
 import React, { ReactNode } from 'react';
-import Link from 'next/link'
-import tw from "tailwind-styled-components"
 import Lottie from "lottie-react";
 
 import Layout from '../components/Layout'

@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import React, { useState } from 'react';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
 import tw from 'tailwind-styled-components';
 import {LocationMarkerSolid} from '@graywolfai/react-heroicons';
 import Coordinates from '../interfaces/coordinates';
@@ -37,7 +37,7 @@ return <>
         <span>Press the button to find deals near you</span>
         <button className="mx-auto bg-yellow-400 text-2xl rounded p-4 font-semibold hover:bg-yellow-300 my-12" onClick={()=>{return searchByLocation(currentCenter);}}>Start Looking!</button>
     </h1>
-    <div className="block relative max-w-lg max-h-96 w-screen h-screen mx-auto relative">
+    <div className="block relative max-w-lg max-h-96 w-screen h-screen mx-auto">
         <StyledMarker/>
         <Map 
         google={google} 
@@ -49,7 +49,7 @@ return <>
         gestureHandling={'greedy'}
         zoomControl={false}
         initialCenter={currentCenter}
-        onCenterChanged={(mapProps, map)=> { return updateCenterFromMap(map as google.maps.Map) }}
+        onCenterChanged={(_mapProps, map)=> { return updateCenterFromMap(map as google.maps.Map) }}
         >
         </Map>
     </div>

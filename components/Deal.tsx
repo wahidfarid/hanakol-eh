@@ -14,7 +14,7 @@ type DealProps = {
 
 const Deal = ({data}:DealProps) =><StyledDeal>
     <span className="text-gray-500 mr-1 line-through">{data.oldPrice}</span>
-    >
+    &gt;
     <span className="text-green-600 mx-1">{data.price} EGP</span>
     {data.name}
     <br/>
