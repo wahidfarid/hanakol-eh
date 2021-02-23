@@ -23,15 +23,14 @@ const StyledTitle = tw.h1`
   mx-6
 `;
 const StyledArabicTitleTW = tw.h1`
-  text-3xl
+  text-5xl
   text-bold
   mx-6
+  border-dashed
+  border-4
+  border-red-500
+  p-2
 `;
-const StyledArabicTitle = styled(StyledArabicTitleTW)`
-  font-family: 'amiri' !important;
-  font-weight: 700 !important;
-`;
-
 const Header = ({title} : Props) => (
   <>
     <Head>
@@ -40,8 +39,16 @@ const Header = ({title} : Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <StyledHeader>
-      <StyledTitle>Hanakol eh</StyledTitle>
-      <StyledArabicTitle>هناكل إيه</StyledArabicTitle>      
+      {/* <StyledTitle>Hanakol eh</StyledTitle> */}
+      <StyledArabicTitleTW
+      style={
+        {
+          fontFamily: "'amiri' !important",
+          fonWeight: "700 !important"
+        }
+      }>
+        هناكل إيه
+      </StyledArabicTitleTW>      
     </StyledHeader>
   </>
 )

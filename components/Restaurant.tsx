@@ -58,35 +58,8 @@ type RestaurantProps = {
 const Restaurant = ( {data}: RestaurantProps) => {
 
     const [isExpanded, toggleExpansion] = useState(false);
-    // useEffect(
-    //   () =>
-    //     setTimeout(() => {
-    //       /* do stuff */
-    //     }, timerMs),
-    //   [timerMs]
-    // );
 
-// let toggleExpansion = (event:MouseEvent) =>{
-//     event.preventDefault();
-
-//     console.log("poopy");
-//     isExpanded = !isExpanded;
-// }
-
-var shit = {}
-return <StyledCard>
-
-    {/* {
-        data.deals?.forEach(d => {
-            if(shit[d.itemId])
-                shit[d.itemId]+=1;
-            else
-                shit[d.itemId] = 1;
-        })
-    }
-        {
-    console.log(shit)
-        } */}
+return <StyledCard style={{width: 330}}>
 
     <a href={data.link} target={"_blank"}>
     <StyledTopSection>

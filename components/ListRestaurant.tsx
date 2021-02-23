@@ -30,9 +30,9 @@ class ListRestaurant extends React.Component<ListRestaurantProps, {}>{
         <Masonry
             breakpointCols={{
                 default: 4,  
-                1100: 3,
-                800: 2,
-                500: 1                
+                1500: 3,
+                1100: 2,
+                768: 1                
             }}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column">
