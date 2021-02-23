@@ -63,7 +63,7 @@ return <>
 </>}
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyAAC8Dk4bEmU8tLS6KcPsSRvJAHj-guH2M", // google maps key
+    apiKey: process.env.APS_API_KEY as string, // google maps key
 })(Start);
 
 // export default Start;
