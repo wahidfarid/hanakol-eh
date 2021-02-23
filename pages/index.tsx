@@ -11,7 +11,8 @@ import foodLoadingAnimation from "../public/img/food-lottie.json";
 import ListRestaurant from '../components/ListRestaurant';
 
 type MainState = {
-  location?: GeolocationCoordinates,
+  // location?: GeolocationCoordinates,
+  location?: {longitude: number, latitude: number}
   restaurants: RestaurantData[],
   isQuerying: boolean
 };
@@ -31,17 +32,19 @@ class IndexPage extends React.Component<{}, MainState>{
 
 
 
-  getLocation = () => {
+  searchByLocation = (location:google.maps.LatLngLiteral) => {
     const parent = this;
-    navigator.geolocation.getCurrentPosition(function(position) {
-      // Set location in state
-      parent.setState({location: position.coords, isQuerying: true});
+    // navigator.geolocation.getCurrentPosition(function(position) {
+    //   // Set location in state
+
+      const coords = {longitude: location.lng, latitude: location.lat};
+      parent.setState({location: coords, isQuerying: true});
 
       // Retrieve all restaurants and put them in state
-      APIAggregator.getAllRestaurantData(position.coords).then((restaurants: RestaurantData[])=>{
+      APIAggregator.getAllRestaurantData(coords).then((restaurants: RestaurantData[])=>{
         parent.setState({restaurants, isQuerying: false});
       });      
-    });
+    // });
   };
 
 
@@ -49,11 +52,11 @@ class IndexPage extends React.Component<{}, MainState>{
   
     return <Layout title="Hanakol eh?">
 
-      <div className="container flex flex-col justify-around">
+      <div className="container flex flex-col justify-around align-middle">
 
           {/* Initial */}
           {
-            (!this.state.isQuerying && this.state.restaurants.length == 0 && <Start getLocation={this.getLocation}/>)
+            (!this.state.isQuerying && this.state.restaurants.length == 0 && <Start searchByLocation={(map)=>this.searchByLocation(map)}/>)
           }
 
           {/* Loading */}

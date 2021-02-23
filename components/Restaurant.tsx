@@ -73,7 +73,21 @@ const Restaurant = ( {data}: RestaurantProps) => {
 //     isExpanded = !isExpanded;
 // }
 
+var shit = {}
 return <StyledCard>
+
+    {/* {
+        data.deals?.forEach(d => {
+            if(shit[d.itemId])
+                shit[d.itemId]+=1;
+            else
+                shit[d.itemId] = 1;
+        })
+    }
+        {
+    console.log(shit)
+        } */}
+
     <a href={data.link} target={"_blank"}>
     <StyledTopSection>
         <StyledImage src={data.image} alt={data.name} className="rounded"/>
@@ -87,16 +101,16 @@ return <StyledCard>
     {data.isDeal && 
         <StyledBottomSection>
             {/* First three deals */}
-            {data.deals?.slice(0,3).map(deal => {
-                return <Deal data={deal} key={deal.itemId}/>
+            {data.deals.slice(0,3).map(deal => {
+                return <Deal data={deal} key={data.id+deal.itemId}/>
             })}
 
             {/* Chevron to expand */}
-            { data.deals?.length>2 && !isExpanded && <ChevronDownSolid onClick={()=>toggleExpansion(!isExpanded)} className="cursor-pointer h-10 text-yellow-400 hover:text-yellow-300 -mb-4" />}    
+            { data.deals.length>2 && !isExpanded && <ChevronDownSolid onClick={()=>toggleExpansion(!isExpanded)} className="cursor-pointer h-10 text-yellow-400 hover:text-yellow-300 -mb-4" />}    
 
             {/* rest of the deals */}
-            {isExpanded && data.deals?.slice(3).map(deal => {
-                return <Deal data={deal} key={deal.itemId}/>
+            {isExpanded && data.deals.slice(3).map(deal => {
+                return <Deal data={deal} key={data.id+deal.itemId}/>
             })}
 
             {/* Chevron to collapse */}

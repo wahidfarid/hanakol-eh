@@ -3,11 +3,11 @@
 const https = require('https')
 const axios = require('./axios/index');
 
-let url = "https://vendors.talabat.com/api/v2/vendors/29.953228799999998/31.047680000000003"
+let url = "https://vendors.talabat.com/api/v2/vendors/";
 
 exports.handler = async function(event, context, callback) {
-
-  async function getTalabat(){
+  
+  async function getTalabat(url){
 
     let response = await axios.get(url);
     return parseTalabat(response.data);
@@ -87,8 +87,8 @@ exports.handler = async function(event, context, callback) {
           let discountValue = data
             .promotions[0]
             .inm.split(" ")
-            .filter((textPart)=> textPart.includes("%"))[0]
-            .replace("%","");
+            .filter((textPart)=> textPart.includes("%"))
+            .map((textPart) => textPart.replace("%",""))[0];
 
           let discountText = data.promotions[0].dsc;
           
@@ -98,19 +98,36 @@ exports.handler = async function(event, context, callback) {
           }
           
         }
-        
         // update restaurant
         restaurants[currentRestaurantIndex] = updatedRestaurant;
         
     });
+    
+    // Remove any restaurants if the have 0 discount percentage
+    restaurants = restaurants.filter((restaurant)=> !(restaurant.isDiscounted && restaurant.discount.percentage == 0));
     
     return restaurants;
   }
   
   async function addDealInformationToTalabatRestaurants(restaurants){
     
-    let listOfMenuPromises = restaurants.map((restaurant) =>  axios.get(`https://www.talabat.com/menuapi/v2/branches/${restaurant.id}/menu`));
+    let listOfMenuPromises = [];
+    let inProgress = Promise.resolve();
     
+    restaurants.forEach(function (restaurant) {
+      inProgress = inProgress.then(function () {
+        return new Promise(function (resolve) {
+          setTimeout(()=>{
+            listOfMenuPromises.push(axios.get(`https://www.talabat.com/menuapi/v2/branches/${restaurant.id}/menu`));
+            resolve();
+          }, 100);
+        });
+      });
+    });
+    await inProgress.then(function () {console.log('Loop finished.');});
+
+    
+// console.log(restaurants.length)    
     let menuResponses = await Promise.all(listOfMenuPromises);
 
     menuResponses.forEach((response, index)=>{
@@ -126,16 +143,23 @@ exports.handler = async function(event, context, callback) {
         menuItems = menuItems.filter((menuItem)=> menuItem.opr != -1 && menuItem.opr != menuItem.pr);
         // pluck needed attributed
         menuItems = menuItems.map((menuItem)=> {
-          return {
-            itemId: menuItem.id,
-            name: menuItem.nm,
-            oldPrice: menuItem.opr,
-            price: menuItem.pr,
-            description: menuItem.dsc
+          
+          // if the id doesn't exist in the menu items list
+          if(menuItems.findIndex(originalMenuItem => originalMenuItem.itemId == menuItem.id) == -1){
+            return {
+              itemId: menuItem.id,
+              name: menuItem.nm,
+              oldPrice: menuItem.opr,
+              price: menuItem.pr,
+              description: menuItem.dsc
+            }
           }
+          // else return empty object to be deleted
+          return {delete: true}
         });
+        
         // Filter duplicated menu items (talabat provides duplicates in some menus)
-        menuItems = menuItems.filter((item)=> menuItems.indexOf((i)=> { return i == item }) );
+        menuItems = menuItems.filter((item)=> item.delete != true );
         
         // update restaurant
         updatedRestaurant.deals = menuItems;
@@ -146,18 +170,22 @@ exports.handler = async function(event, context, callback) {
     return restaurants;
   }
   
-  function getAllRestaurantData(location){
+  function getAllRestaurantData(url){
 
     // combine all services data
-    return getTalabat();
+    return getTalabat(url);
     
   }
   
-  let restaurants = getAllRestaurantData();
-      // Sort based on deal value
+  url = `https://vendors.talabat.com/api/v2/vendors/${event.queryStringParameters.lat}/${event.queryStringParameters.lng}`
+  
+  let restaurants = getAllRestaurantData(url);
+    
+    // Sort based on deal value
     // Return output
     // return restaurants;
   
   return restaurants;   
+  
 
 }

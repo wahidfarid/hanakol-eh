@@ -10,7 +10,7 @@ type RestaurantData ={
     isDiscounted: boolean,
     isDeal: boolean,
     id: number,
-    deals?: RestaurantDeal[],
+    deals: RestaurantDeal[],
     discount?: {
         percentage: number,
         text: string
