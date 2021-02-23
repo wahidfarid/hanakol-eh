@@ -1,10 +1,22 @@
 # Hanakol eh
 
+[Demo at https://hanakol-eh.vercel.app/](https://hanakol-eh.vercel.app/)
+
 this is a simple project that aggregates information on deals and discounts of multiple food delivery services in Egypt and displays the information. Based on React/Next.js/Typescript. uses some serverless scripts to gather data and avoid CORS (scripts in `lambda functions` folder)
 
-This is mainly a personal project for me to play around with some tools/technologies (Next.js in Typescript, TailwindCSS, serverless paradigms, etc...) while at the same time solving the age old question of what to buy because i'm too indecisive.
+This is mainly a personal project for me to play around with some tools/technologies (Next.js in Typescript, TailwindCSS, serverless paradigms, etc...) while at the same time solving the age old question of what to eat because i'm too indecisive.
 
-## How to use it?
+## Roadmap
+- [ ] Design Refresh
+- [ ] Include data from [El Menus](https://www.elmenus.com/), [Akelni](https://www.akelni.com/en) and [MRSOOL](https://mrsool.co/contact) 
+- [ ] Handle restauraunts being closed or busy
+- [ ] Add controls to map component (Zoom, get current location)
+- [x] Basic UI
+- [x] Integration with serverless functions
+- [x] Serverless functions to scrape data of [Talabat](https://www.talabat.com/egypt)
+- [x] Initial App
+
+## How to run it?
 
 ### Website
 1. `npm install`
