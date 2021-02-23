@@ -7,7 +7,7 @@ this is a simple project that aggregates information on deals and discounts of m
 This is mainly a personal project for me to play around with some tools/technologies (Next.js in Typescript, TailwindCSS, serverless paradigms, etc...) while at the same time solving the age old question of what to eat because i'm too indecisive.
 
 ## Roadmap
-- [ ] Design Refresh
+- [ ] Design Refresh / Add animations
 - [ ] Include data from [El Menus](https://www.elmenus.com/), [Akelni](https://www.akelni.com/en) and [MRSOOL](https://mrsool.co/contact) 
 - [ ] Move from a CSS-based masonry to a JS-based one to handle dynamic card heights
 - [ ] Handle restauraunts being closed or busy

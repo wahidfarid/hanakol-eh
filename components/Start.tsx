@@ -15,8 +15,29 @@ const StyledMarker = tw(LocationMarkerSolid)`
     top-1/2
     -my-12
     -ml-6
-`
+`;
 
+const StyledHeading = tw.h1`
+    text-4xl 
+    flex 
+    flex-col 
+    justify-center 
+    align-middle 
+    text-center 
+    my-12 
+`;
+
+const StyledMapContainer = tw.div`
+    relative 
+    max-w-lg 
+    max-h-96 
+    w-screen 
+    h-screen 
+    mx-auto
+    border-dashed 
+    border-4 
+    border-yellow-400
+`;
 
 type StartProps = {
     searchByLocation(map: Coordinates): void,
@@ -33,11 +54,7 @@ const Start = ({searchByLocation, google}: StartProps) => {
     };
 
 return <>
-    <h1 className="text-5xl flex flex-col justify-center align-middle text-center my-12">
-        <span>Press the button to find deals near you</span>
-        <button className="mx-auto bg-yellow-400 text-2xl rounded p-4 font-semibold hover:bg-yellow-300 my-12" onClick={()=>{return searchByLocation(currentCenter);}}>Start Looking!</button>
-    </h1>
-    <div className="block relative max-w-lg max-h-96 w-screen h-screen mx-auto">
+    <StyledMapContainer>
         <StyledMarker/>
         <Map 
         google={google} 
@@ -52,7 +69,11 @@ return <>
         onCenterChanged={(_mapProps, map)=> { return updateCenterFromMap(map as google.maps.Map) }}
         >
         </Map>
-    </div>
+    </StyledMapContainer>
+    <StyledHeading>
+        <span>Drag the marker on the map, then press the button to find deals near you</span>
+        <button className="mx-auto bg-yellow-400 text-2xl rounded p-4 font-semibold hover:bg-yellow-300 my-12" onClick={()=>{return searchByLocation(currentCenter);}}>Start Looking!</button>
+    </StyledHeading>
 </>}
 
 export default GoogleApiWrapper({
