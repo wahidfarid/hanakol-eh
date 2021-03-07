@@ -3,6 +3,7 @@ import {Map, GoogleApiWrapper} from 'google-maps-react';
 import tw from 'tailwind-styled-components';
 import {LocationMarkerSolid} from '@graywolfai/react-heroicons';
 import Coordinates from '../interfaces/coordinates';
+import GetLocationMapControl from './GetLocationMapControl';
 
 
 const StyledMarker = tw(LocationMarkerSolid)`
@@ -53,18 +54,23 @@ const Start = ({searchByLocation, google}: StartProps) => {
         setCurrentCenter({lat: center.lat(), lng: center.lng()});
     };
 
+    const onMapReady = (_:any, map: any) => {
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(new GetLocationMapControl(map));
+    }
+
 return <>
     <StyledMapContainer>
         <StyledMarker/>
         <Map 
         google={google} 
+        onReady={onMapReady}
         zoom={14} 
         streetViewControl={false} 
         mapTypeControl={false}
         clickableIcons={false}
         fullscreenControl={false}
         gestureHandling={'greedy'}
-        zoomControl={false}
+        zoomControl={true}
         initialCenter={currentCenter}
         onCenterChanged={(_mapProps, map)=> { return updateCenterFromMap(map as google.maps.Map) }}
         >
