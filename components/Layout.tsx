@@ -38,7 +38,7 @@ const StyledFooter = tw.footer`
 `
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+  <div style={{position: "relative"}}>
     <Header title={title}/>
     <StyledContainerTW>
       {children}
