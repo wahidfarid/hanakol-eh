@@ -38,7 +38,7 @@ const StyledFooter = tw.footer`
 `
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div style={{position: "relative"}}>
+  <div style={{position: "relative"}} className="min-h-screen">
     <Header title={title}/>
     <StyledContainerTW>
       {children}
