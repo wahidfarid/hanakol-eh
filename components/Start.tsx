@@ -19,20 +19,23 @@ const StyledMarker = tw(LocationMarkerSolid)`
 `;
 
 const StyledHeading = tw.h1`
-    text-4xl 
+    text-xl
+    lg:text-4xl 
     flex 
     flex-col 
     justify-center 
     align-middle 
-    text-center 
-    my-12 
+    text-center
+    my-4 
+    lg:my-12 
 `;
 
 const StyledMapContainer = tw.div`
     relative 
-    max-w-lg 
+    lg:max-w-lg 
     max-h-96 
-    w-screen 
+    lg:w-screen 
+    w-full
     h-screen 
     mx-auto
     border-dashed 
@@ -78,7 +81,7 @@ return <>
     </StyledMapContainer>
     <StyledHeading>
         <span>Drag the marker on the map, then press the button to find deals near you</span>
-        <button className="mx-auto bg-yellow-400 text-2xl rounded p-4 font-semibold hover:bg-yellow-300 my-12" onClick={()=>{return searchByLocation(currentCenter);}}>Start Looking!</button>
+        <button className="mx-auto bg-yellow-400 text-xl lg:text-2xl rounded p-4 font-semibold hover:bg-yellow-300 my-4 lg:my-12" onClick={()=>{return searchByLocation(currentCenter);}}>Start Looking!</button>
     </StyledHeading>
 </>}
 
