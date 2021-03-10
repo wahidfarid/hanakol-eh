@@ -23,10 +23,11 @@ const StyledContainerTW = tw(StyledContainer)`
   bg-white
   bg-opacity-50
   p-12
+  pt-44
 `;
 
 const StyledFooter = tw.footer`
-  fixed
+  absolute
   bottom-0
   p-1
   justify-center

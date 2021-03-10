@@ -13,6 +13,9 @@ const StyledHeader = tw.header`
   to-yellow-400
   flex
   justify-center
+  absolute
+  top-0
+  w-full
 `;
 const StyledArabicTitleTW = tw.h1`
   text-5xl
