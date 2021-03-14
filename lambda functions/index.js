@@ -16,11 +16,12 @@ exports.handler = async function(event, context, callback) {
   function parseTalabat(data){
     
     // Extract restaurants
-    const responseRestaurants = data.result.restaurants;
-    // Filter them by deals
+    const responseRestaurants = data.result.restaurants; 
+    // Filter them by deals and open status
     // dtxt refers to discount and ptxt reffers to offer
+    // st refers to restaurant status {0: active, 1: closed, 2: busy}
     const filteredRestaurants = responseRestaurants.filter((restaurant)=> {
-      return (restaurant.ptxt!="" || restaurant.dtxt!="")
+      return (restaurant.ptxt!="" || restaurant.dtxt!="") && restaurant.st != 1
     });
     
     // Pluck needed info
@@ -124,10 +125,9 @@ exports.handler = async function(event, context, callback) {
         });
       });
     });
-    await inProgress.then(function () {console.log('Loop finished.');});
+    await inProgress.then(function () {});
 
     
-// console.log(restaurants.length)    
     let menuResponses = await Promise.all(listOfMenuPromises);
 
     menuResponses.forEach((response, index)=>{
@@ -177,6 +177,9 @@ exports.handler = async function(event, context, callback) {
     
   }
   
+  // event = {queryStringParameters: {}};
+  // event.queryStringParameters.lat = '29.956204900000003';
+  // event.queryStringParameters.lng = '31.073941099999995';
   url = `https://vendors.talabat.com/api/v2/vendors/${event.queryStringParameters.lat}/${event.queryStringParameters.lng}`
   
   let restaurants = getAllRestaurantData(url);
@@ -189,3 +192,5 @@ exports.handler = async function(event, context, callback) {
   
 
 }
+
+// exports.handler().then(data=> console.log(data, data.length));
