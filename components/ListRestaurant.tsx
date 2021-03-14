@@ -6,7 +6,9 @@ import RestaurantData from "../interfaces/restaurant-data";
 import Restaurant from './Restaurant';
 
 type ListRestaurantProps = {
-    restaurants: RestaurantData[]
+    restaurants: RestaurantData[],
+    numberOfClosedRestaurants: number,
+    numberOfFakeDealRestaurants: number,
 };
 
 const StyledMasonry = styled.div`
@@ -23,10 +25,16 @@ background-clip: padding-box;
 }
 `
 
+const PruneInformation = styled.p`
+    text-align: center;
+`
+
 class ListRestaurant extends React.Component<ListRestaurantProps, {}>{
 
     render(){
-        return <StyledMasonry>
+        return <div>
+        <PruneInformation>Filtered out <b>{this.props.numberOfClosedRestaurants}</b> closed restaurants and <b>{this.props.numberOfFakeDealRestaurants}</b> restaurants with fake deals</PruneInformation>
+        <StyledMasonry>
         <Masonry
             breakpointCols={{
                 default: 4,  
@@ -40,7 +48,8 @@ class ListRestaurant extends React.Component<ListRestaurantProps, {}>{
                 this.props.restaurants.map((restaurant)=> <Restaurant key={restaurant.id} data={restaurant}/> )
             }
         </Masonry>
-      </StyledMasonry>;
+      </StyledMasonry>
+      </div>;
     }
 }
 

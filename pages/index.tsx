@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import Layout from '../components/Layout'
 import Start from '../components/Start';
 import APIAggregator from './api/api-aggregator';
-import RestaurantData from '../interfaces/restaurant-data';
+import { QueryPayload } from '../interfaces/restaurant-data';
 import foodLoadingAnimation from "../public/img/food-lottie.json";
 import ListRestaurant from '../components/ListRestaurant';
 import Coordinates from '../interfaces/coordinates';
@@ -12,24 +12,35 @@ import Coordinates from '../interfaces/coordinates';
 type MainState = {
   // location?: GeolocationCoordinates,
   location?: Coordinates
-  restaurants: RestaurantData[],
-  isQuerying: boolean
+  data: QueryPayload,
+  isQuerying: boolean,
 };
 
 class IndexPage extends React.Component<{}, MainState>{
 
   state: MainState = {
     isQuerying: false,
-    restaurants: [],
-    location: {lat: 30.033333, lng:31.233334} 
+    location: {lat: 30.033333, lng:31.233334},
+    data: {
+      pruned:{
+        closed: {
+            1: 0
+        },
+        fakeDeal: {
+            1: 0
+        }
+      },
+      time: '',
+      restaurants: []
+    } as QueryPayload
   };
 
   searchByLocation = (location: Coordinates) => {
     this.setState({location, isQuerying: true});
       
       // Retrieve all restaurants and put them in state
-    APIAggregator.getAllRestaurantData(location).then((restaurants: RestaurantData[])=>{
-      this.setState({restaurants, isQuerying: false});
+    APIAggregator.getAllRestaurantData(location).then((response: QueryPayload)=>{
+      this.setState({data: response, isQuerying: false});
     });     
   };
 
@@ -42,7 +53,7 @@ class IndexPage extends React.Component<{}, MainState>{
 
           {/* Initial */}
           {
-            (!this.state.isQuerying && this.state.restaurants.length == 0 && <Start searchByLocation={this.searchByLocation}/>)
+            (!this.state.isQuerying && this.state.data.restaurants.length == 0 && <Start searchByLocation={this.searchByLocation}/>)
           }
 
           {/* Loading */}
@@ -52,7 +63,11 @@ class IndexPage extends React.Component<{}, MainState>{
 
           {/* Results */}
           {
-            (!this.state.isQuerying && this.state.restaurants.length > 0 && <ListRestaurant restaurants={this.state.restaurants}/> )
+            (!this.state.isQuerying && this.state.data.restaurants.length > 0 && 
+              <ListRestaurant 
+              restaurants={this.state.data.restaurants}
+              numberOfClosedRestaurants={this.state.data.pruned.closed[1]}
+              numberOfFakeDealRestaurants={this.state.data.pruned.fakeDeal[1]}/> )
           }
 
       </div>

@@ -1,3 +1,15 @@
+export type QueryPayload = {
+    pruned:{
+        closed: {
+            1: number
+        },
+        fakeDeal: {
+            1: number
+        }
+    },
+    time: string,
+    restaurants: RestaurantData[]
+}
 export type RestaurantDeal = {
     itemId: number,
     name: string,
