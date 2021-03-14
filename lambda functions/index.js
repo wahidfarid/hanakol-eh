@@ -2,6 +2,7 @@
 // JavaScript File
 const https = require('https')
 const axios = require('./axios/index');
+const Statistics = require('./StatisticsCollector');
 
 let url = "https://vendors.talabat.com/api/v2/vendors/";
 
@@ -20,8 +21,15 @@ exports.handler = async function(event, context, callback) {
     // Filter them by deals and open status
     // dtxt refers to discount and ptxt reffers to offer
     // st refers to restaurant status {0: active, 1: closed, 2: busy}
-    const filteredRestaurants = responseRestaurants.filter((restaurant)=> {
-      return (restaurant.ptxt!="" || restaurant.dtxt!="") && restaurant.st != 1
+    let filteredRestaurants = [];
+    responseRestaurants.forEach(restaurant=>{
+      if(restaurant.ptxt!="" || restaurant.dtxt!=""){
+        if(restaurant.st != 1){
+          filteredRestaurants.push(restaurant);
+        }else{
+          Statistics.addClosedRestaurant('talabat');
+        }
+      }
     });
     
     // Pluck needed info
@@ -51,7 +59,15 @@ exports.handler = async function(event, context, callback) {
     
     // Prune restaurants if they say deal but don't have deals
     // (happens when they are listed as a special offer but don't have old/new prices)
-    restaurants = restaurants.filter((restaurant)=> !(restaurant.isDeal && restaurant.deals.length == 0) );
+    restaurants = restaurants.filter((restaurant)=> {
+
+      if(!(restaurant.isDeal && restaurant.deals.length == 0))
+        return true;
+
+      Statistics.addFakeDealRestaurant('talabat');
+      return false;
+
+    });
     
     return restaurants;
   }
@@ -177,20 +193,20 @@ exports.handler = async function(event, context, callback) {
     
   }
   
-  // event = {queryStringParameters: {}};
-  // event.queryStringParameters.lat = '29.956204900000003';
-  // event.queryStringParameters.lng = '31.073941099999995';
   url = `https://vendors.talabat.com/api/v2/vendors/${event.queryStringParameters.lat}/${event.queryStringParameters.lng}`
   
-  let restaurants = getAllRestaurantData(url);
+  Statistics.startQueryTimer();
+  let restaurants = await getAllRestaurantData(url);
+  Statistics.stopQueryTimer();
     
     // Sort based on deal value
     // Return output
     // return restaurants;
   
-  return restaurants;   
+  return {
+    restaurants,
+    ...Statistics.getStatistics()
+  };   
   
 
 }
-
-// exports.handler().then(data=> console.log(data, data.length));
