@@ -12,15 +12,15 @@ module.exports = {
   ],
   globals: {
     "ts-jest": {
-      useBabelrc: true,
-      tsConfigFile: "jest.tsconfig.json"
+      babelConfig: true,
+      tsconfig: "jest.tsconfig.json"
     }
   },
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "enzyme.js"
   ],
-  setupTestFrameworkScriptFile: "<rootDir>/enzyme.js",
+  setupFilesAfterEnv: ["<rootDir>/enzyme.js"],
   coverageReporters: [
     "json",
     "lcov",

@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "export": "next export"
+    "export": "next export",
+    "test": "jest"
   },
   "dependencies": {
     "@graywolfai/react-heroicons": "^1.2.3",
