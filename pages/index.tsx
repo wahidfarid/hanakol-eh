@@ -41,7 +41,7 @@ class IndexPage extends React.Component<{}, MainState>{
       // Retrieve all restaurants and put them in state
     APIAggregator.getAllRestaurantData(location).then((response: QueryPayload)=>{
       this.setState({data: response, isQuerying: false});
-    });     
+    });
   };
 
 

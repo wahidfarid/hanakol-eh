@@ -10,7 +10,9 @@ This is mainly a personal project for me to play around with some tools/technolo
 - [ ] Design Refresh / Add animations
 - [ ] Include data from [El Menus](https://www.elmenus.com/), [Akelni](https://www.akelni.com/en) and [MRSOOL](https://mrsool.co/contact) 
 - [ ] Move from a CSS-based masonry to a JS-based one to handle dynamic card heights
-- [ ] Handle restauraunts being closed or busy
+- [ ] Add versioning and explanation to header
+- [ ] Testing
+- [x] Handle restauraunts being closed or busy
 - [x] Add controls to map component (Zoom, get current location)
 - [x] Basic UI
 - [x] Integration with serverless functions
